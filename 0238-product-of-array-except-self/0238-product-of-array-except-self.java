@@ -15,10 +15,6 @@ class Solution {
                 right[n - 1 - i] *= right[n - i];
             }
         }
-
-        System.out.println(Arrays.toString(left));
-        System.out.println(Arrays.toString(right));
-
         for (int i = 0; i < n; i++) {
             answer[i] = 1;
             if (i > 0)
