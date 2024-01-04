@@ -1,24 +1,36 @@
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
 class Solution {
-
-    public Set<Character> sortedSet(String s) {
-        Set<Character> sortedSet = new TreeSet<>();
-        for (char c : s.toCharArray()) {
-            sortedSet.add(c);
-        }
-
-        return sortedSet;
-    }
-
     public String removeDuplicateLetters(String s) {
-        for (char c : sortedSet(s)) {
-            String suffix = s.substring(s.indexOf(c));
-            if (sortedSet(s).equals(sortedSet(suffix))) {
-                return c + removeDuplicateLetters(suffix.replaceAll(String.valueOf(c), ""));
-            }
+        Map<Character, Integer> counter = new HashMap<>();
+        Map<Character, Boolean> seen = new HashMap<>();
+        Deque<Character> stack = new ArrayDeque<>();
+
+        for (char c : s.toCharArray()) {
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
         }
-        return "";
+
+        for (char c : s.toCharArray()) {
+            counter.put(c, counter.get(c) - 1);
+            
+            if (seen.containsKey(c) && seen.get(c)) {
+                continue;
+            }
+                    
+            while (!stack.isEmpty() && stack.peek() > c && counter.get(stack.peek()) > 0) {
+                seen.put(stack.pop(), false);
+            }
+            stack.push(c);
+            seen.put(c, true);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : stack) {
+            sb.append(c);
+        }
+        return sb.toString();
     }
 }
