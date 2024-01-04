@@ -29,8 +29,9 @@ class Solution {
 
         StringBuilder sb = new StringBuilder();
         while (!stack.isEmpty()) {
-            sb.append(stack.pollLast());
+            sb.append(stack.poll());
         }
+        sb.reverse();
         return sb.toString();
     }
 }
