@@ -15,11 +15,11 @@ class Solution {
 
         for (char c : s.toCharArray()) {
             counter.put(c, counter.get(c) - 1);
-            
+
             if (seen.containsKey(c) && seen.get(c)) {
                 continue;
             }
-                    
+
             while (!stack.isEmpty() && stack.peek() > c && counter.get(stack.peek()) > 0) {
                 seen.put(stack.pop(), false);
             }
@@ -28,8 +28,8 @@ class Solution {
         }
 
         StringBuilder sb = new StringBuilder();
-        for (char c : stack) {
-            sb.append(c);
+        while (!stack.isEmpty()) {
+            sb.append(stack.pollLast());
         }
         return sb.toString();
     }
