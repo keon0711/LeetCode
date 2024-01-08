@@ -1,31 +1,32 @@
-import javax.swing.text.AttributeSet;
 import java.util.*;
 
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        Set<Integer> remainNums = new HashSet<>();
-        for (int n : nums) {
-            remainNums.add(n);
-        }
 
-        dfs(new ArrayList<>(), remainNums, result);
+        dfs(0, nums, new LinkedList<>(), result);
 
         return result;
     }
 
-    private void dfs(List<Integer> integers, Set<Integer> remainNums, List<List<Integer>> result) {
-        if (remainNums.isEmpty()) {
-            result.add(new ArrayList<>(integers));
+    private void dfs(int index, int[] nums, LinkedList<Integer> current,List<List<Integer>> result) {
+        if (index == nums.length) {
+            result.add(new ArrayList<>(current));
             return;
         }
 
-        for (int n : remainNums) {
-            Set<Integer> nextRemain = new HashSet<>(remainNums);
-            integers.add(n);
-            nextRemain.remove(n);
-            dfs(integers, nextRemain, result);
-            integers.remove(integers.size() - 1);
+        for (int i = index; i < nums.length; i++) {
+            swap(index, i, nums);
+            current.addLast(nums[index]);
+            dfs(index + 1, nums, current, result);
+            current.pollLast();
+            swap(index, i, nums);
         }
+    }
+
+    private void swap(int a, int b, int[] nums) {
+        int tmp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = tmp;
     }
 }
