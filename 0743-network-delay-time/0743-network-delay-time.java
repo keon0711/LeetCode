@@ -17,15 +17,14 @@ class Solution {
             int[] poll = pq.poll();
             int node = poll[0];
             int weight = poll[1];
-            if (dist[node] != -1 && dist[node] <= weight) {
-                continue;
-            }
-            dist[node] = weight;
 
-            if (!map.containsKey(node))
-                continue;
-            for (int[] next : map.get(node)) {
-                pq.add(new int[]{next[0], weight + next[1]});
+            if (dist[node] == -1) {
+                dist[node] = weight;
+                if (!map.containsKey(node))
+                    continue;
+                for (int[] next : map.get(node)) {
+                    pq.add(new int[]{next[0], weight + next[1]});
+                }
             }
         }
 
