@@ -20,9 +20,7 @@ class Solution {
 
             if (dist[node] == -1) {
                 dist[node] = weight;
-                if (!map.containsKey(node))
-                    continue;
-                for (int[] next : map.get(node)) {
+                for (int[] next : map.getOrDefault(node, new ArrayList<>())) {
                     pq.add(new int[]{next[0], weight + next[1]});
                 }
             }
