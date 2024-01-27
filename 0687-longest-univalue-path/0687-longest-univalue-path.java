@@ -22,7 +22,6 @@ class Solution {
         if (node.right != null && node.val == node.right.val) {
             rightDist = right ;
         }
-        System.out.println(node.val + ": " + leftDist + ", " + rightDist);
         longestPath = Math.max(longestPath, leftDist + rightDist);
         return Math.max(leftDist, rightDist);
     }
