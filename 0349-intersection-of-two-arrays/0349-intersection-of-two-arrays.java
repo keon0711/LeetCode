@@ -12,9 +12,13 @@ class Solution {
                 set.add(i);
             }
         }
-        return set.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+
+        int[] result = new int[set.size()];
+        int index = 0;
+        for (Integer num : set) {
+            result[index++] = num;
+        }
+        return result;
     }
 
 }
