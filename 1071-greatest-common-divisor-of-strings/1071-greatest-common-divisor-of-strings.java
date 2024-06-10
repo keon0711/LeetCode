@@ -1,12 +1,11 @@
 class Solution {
     public boolean valid(String str1, String str2, int k) {
         int len1 = str1.length(), len2 = str2.length();
-        if (len1 % k > 0 || len2 % k > 0) {
-            return false;
-        } else {
+        if (len1 % k == 0 && len2 % k == 0) {
             String base = str1.substring(0, k);
             return str1.replace(base, "").isEmpty() && str2.replace(base, "").isEmpty();
-        }
+        } 
+        return false;
     }
     
     
