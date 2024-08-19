@@ -24,7 +24,7 @@ class Solution {
         return dp[lastDay];
     }
 
-    private static void calcMinimumCost(int[] costs, int[] dp, int day) {
+    private void calcMinimumCost(int[] costs, int[] dp, int day) {
         int cost1 = dp[day - 1] + costs[0];
         int cost2 = dp[Math.max(day - 7, 0)] + costs[1];
         int cost3 = dp[Math.max(day - 30, 0)] + costs[2];
@@ -32,15 +32,5 @@ class Solution {
         dp[day] = Math.min(cost1, Math.min(cost2, cost3));
     }
 
-    private static boolean isDayInDays(int[] days, int day) {
-        boolean flag = false;
-        for (int i : days) {
-            if (i == day) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
 
 }
