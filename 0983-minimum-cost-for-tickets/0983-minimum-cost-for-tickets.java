@@ -2,10 +2,17 @@ class Solution {
     
     public int mincostTickets(int[] days, int[] costs) {
 
-        int[] dp = new int[days[days.length - 1] + 1];
+        int lastDay = days[days.length - 1];
+        int[] dp = new int[lastDay + 1];
+        boolean[] travelDays = new boolean[lastDay + 1];
 
-        for (int day = 1; day <= days[days.length - 1]; day++) {
-            if (!isDayInDays(days, day)){
+        for (int day : days) {
+            travelDays[day] = true;
+        }
+
+        for (int day = 1; day <= lastDay; day++) {
+
+            if (!travelDays[day]) {
                 dp[day] = dp[day - 1];
                 continue;
             }
@@ -14,7 +21,7 @@ class Solution {
         }
 
         System.out.println(Arrays.toString(dp));
-        return dp[days[days.length - 1]];
+        return dp[lastDay];
     }
 
     private static void calcMinimumCost(int[] costs, int[] dp, int day) {
